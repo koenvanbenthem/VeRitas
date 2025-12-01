@@ -5,6 +5,7 @@ output: github_document
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, include = FALSE}
+# devtools::build_readme()
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -18,14 +19,14 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of VeRitas is to ...
+VeRitas allows for automated feedback on submitted code through a manually designed set of feedback rules. These rules consist of binary tests on the submitted code, based on the outcome of which feedback is shown and after which the code is sent to a next test.
 
 ## Installation
 
-You can install the development version of VeRitas like so:
+You can install the development version of VeRitas with the following command (requires a functioning installation of the devtools package):
 
-``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+```{r eval=FALSE}
+devtools::install_github("koenvanbenthem/VeRitas")
 ```
 
 ## Example
@@ -37,18 +38,3 @@ library(VeRitas)
 ## basic example code
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
-
-```{r cars}
-summary(cars)
-```
-
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this.
-
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
-```
-
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
