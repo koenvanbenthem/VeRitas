@@ -6,6 +6,7 @@ output: github_document
 
 ```{r, include = FALSE}
 # devtools::build_readme()
+# website? pkgdwn
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -33,8 +34,20 @@ devtools::install_github("koenvanbenthem/VeRitas")
 
 This is a basic example which shows you how to solve a common problem:
 
-```{r example}
+```{r example,fig.width=7,fig.height=7}
 library(VeRitas)
-## basic example code
+
+ref <- list(a=17,
+            b=21)
+
+net <- list(start=node("has_val(ref$a)",goT="S1",goF="END",doT="[✓] a is found!",doF="[x] a is not found"),
+            S1=node("did_call('plot')",goT="END",goF="END",doT="[?] Why plot? Please find a instead!")
+            )
+library(igraph)
+drawNet(net,draw="static",layout=layout_as_tree,margin=0.3,size=30,vertex.shape="none",vertex.label.color="black")
+net <- cleanNet(net)
+trackfuns <- extractFuns(net)
+
+runEval("Examples/code1.R",trackfuns,ref,net)
 ```
 
