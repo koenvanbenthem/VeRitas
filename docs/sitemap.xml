@@ -1,0 +1,14 @@
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/reference/cleanNet.html</loc></url>
+<url><loc>/reference/codeRunner.html</loc></url>
+<url><loc>/reference/drawNet.html</loc></url>
+<url><loc>/reference/extractFuns.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/makeTrackEnv.html</loc></url>
+<url><loc>/reference/node.html</loc></url>
+<url><loc>/reference/runEval.html</loc></url>
+</urlset>
+
