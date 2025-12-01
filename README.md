@@ -32,7 +32,7 @@ library(VeRitas)
 ref <- list(a=17,
             b=21)
 
-net <- list(start=node("has_val(ref$a)",goT="S1",goF="END",doT="[✓] a is found!",doF="[x] a is not found"),
+net <- list(start=node("has_val(ref$a)",goT="END",goF="S1",doT="[✓] a is found!",doF="[x] a is not found"),
             S1=node("did_call('plot')",goT="END",goF="END",doT="[?] Why plot? Please find a instead!")
             )
 library(igraph)
@@ -56,4 +56,6 @@ trackfuns <- extractFuns(net)
 
 runEval("Examples/code1.R",trackfuns,ref,net)
 #> [x] a is not found
+#> 
+#> [?] Why plot? Please find a instead!
 ```
