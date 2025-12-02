@@ -11,7 +11,7 @@
 #   Test Package:              'Ctrl + Shift + T'
 #
 # Run roxygen through roxygen2::roxygenise()
-
+# Build website through pkgdown::build_site_github_pages()
 
 
 # boe <- function(am,b,d=3,...){

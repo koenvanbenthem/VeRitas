@@ -54,7 +54,7 @@ drawNet(net,draw="static",layout=layout_as_tree,margin=0.3,size=30,vertex.shape=
 net <- cleanNet(net)
 trackfuns <- extractFuns(net)
 
-runEval("Examples/code1.R",trackfuns,ref,net)
+runEval("examples/01-simplest/code1.R",trackfuns,ref,net)
 #> [x] a is not found
 #> 
 #> [?] Why plot? Please find a instead!
