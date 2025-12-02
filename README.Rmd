@@ -34,7 +34,7 @@ devtools::install_github("koenvanbenthem/VeRitas")
 
 This is a basic example which shows you how to solve a common problem:
 
-```{r example,fig.width=7,fig.height=7}
+```{r example,fig.width=7,fig.height=7,out.width="50%",fig.align='center'}
 library(VeRitas)
 
 ref <- list(a=17,

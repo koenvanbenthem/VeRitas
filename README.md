@@ -48,7 +48,7 @@ library(igraph)
 drawNet(net,draw="static",layout=layout_as_tree,margin=0.3,size=30,vertex.shape="none",vertex.label.color="black")
 ```
 
-<img src="man/figures/README-example-1.png" width="100%" />
+<img src="man/figures/README-example-1.png" width="50%" style="display: block; margin: auto;" />
 
 ``` r
 net <- cleanNet(net)
