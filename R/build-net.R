@@ -1,7 +1,9 @@
 
+
 #' Create a new node in the decision network
 #' @export
 node <- function(cond,goT="END",goF="END",doT="",doF=""){
+
   if(missing(doT)){
     doT <- ""
   }
@@ -12,14 +14,32 @@ node <- function(cond,goT="END",goF="END",doT="",doF=""){
 
   if(missing(goT)){
     goT <- "END"
+  }else{
+
+    goTsubs <- substitute(goT)
+    if(class(goTsubs)=="name"){
+      goT <- deparse(goTsubs)
+    }
   }
 
   if(missing(goF)){
     goF <- "END"
+  }else{
+
+    goFsubs <- substitute(goF)
+    if(class(goFsubs)=="name"){
+      goF <- deparse(goFsubs)
+    }
   }
 
   if(missing(cond)){
     cond <- ""
+  }else{
+
+    condsubs <- substitute(cond)
+    if(class(condsubs)=="call"){
+      cond <- deparse(condsubs)
+    }
   }
   data.frame(condition=cond,goT=goT,goF=goF,doT=doT,doF=doF)
 }

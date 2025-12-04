@@ -1,0 +1,20 @@
+---
+title: "Batch checking"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{batch-run}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(VeRitas)
+7+4
+```

@@ -1,5 +1,6 @@
 pandoc: 3.1.11
 pkgdown: 2.1.1
 pkgdown_sha: ~
-articles: {}
-last_built: 2025-12-01T22:24Z
+articles:
+  batch-run: batch-run.html
+last_built: 2025-12-04T09:26Z

@@ -26,8 +26,6 @@ This is a basic example which shows you how to solve a common problem:
 
 ``` r
 library(VeRitas)
-#> Warning: replacing previous import 'igraph::crossing' by 'tidyr::crossing' when
-#> loading 'VeRitas'
 
 ref <- list(a=17,
             b=21)
@@ -36,19 +34,10 @@ net <- list(start=node("has_val(ref$a)",goT="END",goF="S1",doT="[✓] a is found
             S1=node("did_call('plot')",goT="END",goF="END",doT="[?] Why plot? Please find a instead!")
             )
 library(igraph)
-#> Warning: package 'igraph' was built under R version 4.4.3
-#> 
-#> Attaching package: 'igraph'
-#> The following objects are masked from 'package:stats':
-#> 
-#>     decompose, spectrum
-#> The following object is masked from 'package:base':
-#> 
-#>     union
 drawNet(net,draw="static",layout=layout_as_tree,margin=0.3,size=30,vertex.shape="none",vertex.label.color="black")
 ```
 
-<img src="man/figures/README-example-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="man/figures/README-example-1.png" width="75%" height="75%" style="display: block; margin: auto;" />
 
 ``` r
 net <- cleanNet(net)

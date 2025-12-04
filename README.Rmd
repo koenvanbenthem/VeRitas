@@ -34,14 +34,14 @@ devtools::install_github("koenvanbenthem/VeRitas")
 
 This is a basic example which shows you how to solve a common problem:
 
-```{r example,fig.width=7,fig.height=7,out.width="50%",fig.align='center'}
+```{r example,fig.width=7,fig.height=7,out.width='75%',out.height='75%',fig.align='center',warning=FALSE,message=FALSE}
 library(VeRitas)
 
 ref <- list(a=17,
             b=21)
 
-net <- list(start=node("has_val(ref$a)",goT="END",goF="S1",doT="[✓] a is found!",doF="[x] a is not found"),
-            S1=node("did_call('plot')",goT="END",goF="END",doT="[?] Why plot? Please find a instead!")
+net <- list(start=node(has_val(ref$a),goT=END,goF=S1,doT="[✓] a is found!",doF="[x] a is not found"),
+            S1=node(did_call("plot"),goT=END,goF=END,doT="[?] Why plot? Please find a instead!")
             )
 library(igraph)
 drawNet(net,draw="static",layout=layout_as_tree,margin=0.3,size=30,vertex.shape="none",vertex.label.color="black")
