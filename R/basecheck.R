@@ -140,17 +140,19 @@ cleanCode <- function(code){
 ######### Run student evalation
 #' Main function for running a single R script
 #' @export
-runEval <- function(Rfile,totrack,ref,net,csv='',killFuns=c("`?`","setwd","system","file.choose","install.packages","View"),verbose=FALSE){
+runEval <- function(Rfile,totrack,ref,net,csv='',killFuns=c("`?`","setwd","system","file.choose","install.packages","View"),verbose=FALSE,netcount=FALSE){
   # Run code
   ref <- as.list(ref)
   obj <- checkRstart(Rfile,funList = totrack,csv=csv,killFuns=killFuns)
+  net$nT <- 0
+  net$nF <- 0
 
   ######### Run student evaluation through decision net
   currNode <- "start"
   iter <- 0
   while(currNode!="END" & iter < 200){
-
-    thisnode <- net[rownames(net)==currNode,]
+    thisnodeID <- rownames(net)==currNode
+    thisnode <- net[thisnodeID,]
     outp <- eval(parse(text=thisnode$condition))
 
     if(outp){
@@ -160,6 +162,7 @@ runEval <- function(Rfile,totrack,ref,net,csv='',killFuns=c("`?`","setwd","syste
         cat(out.text)
         cat("\n\n")
       }
+      net$nT[thisnodeID] <- net$nT[thisnodeID] + 1
       currNode <- thisnode$goT
     }else{
       if(!thisnode$doF==""){
@@ -168,12 +171,38 @@ runEval <- function(Rfile,totrack,ref,net,csv='',killFuns=c("`?`","setwd","syste
         cat(out.text)
         cat("\n\n")
       }
+      net$nF[thisnodeID] <- net$nF[thisnodeID] + 1
       currNode <- thisnode$goF
     }
     iter <- iter + 1
+  }
+  if (verbose & netcount){
+    return(list(net=net,obj=obj))
   }
 
   if(verbose){
     return(obj)
   }
+
+  if(netcount){
+    return(net)
+  }
+}
+
+#' @export
+#'
+prepareAssignment <- function(net,referencefile){
+  ref <- new.env()
+  source(referencefile,local=ref)
+  ref <- as.list(ref)
+
+  net <- cleanNet(net)
+  trackfuns <- extractFuns(net)
+
+  list(net=net,trackfuns=trackfuns,ref=ref)
+}
+
+#' @export
+runSingle <- function(studentfile,prepared){
+  runEval(studentfile,prepared$trackfuns,prepared$ref,prepared$net)
 }

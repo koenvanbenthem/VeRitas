@@ -57,7 +57,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/batch-run.html">batch-run</a>
+      <a href="articles/batch-run.html">Batch run</a>
     </li>
   </ul>
 </li>
@@ -90,27 +90,56 @@
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
-<p>This is a basic example which shows you how to solve a common problem:</p>
+<p>This is a basic example which shows you how to solve a common problem. Assume you have given students the assignment to add up the squares of the number 1 up to and including 5 (i.e. <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>1</mn><mn>2</mn></msup><mo>+</mo><msup><mn>2</mn><mn>2</mn></msup><mo>+</mo><msup><mn>3</mn><mn>2</mn></msup><mo>+</mo><msup><mn>4</mn><mn>2</mn></msup><mo>+</mo><msup><mn>5</mn><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">1^2+2^2+3^2+4^2+5^2</annotation></semantics></math>).</p>
+<p>Start by defining a reference implementation in the file ref1.R, that contains:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Reference in file ref1.R</span></span>
+<span><span class="co"># available in examples/01-simplest</span></span>
+<span><span class="va">sol</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">wrongsol</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>The reference thus holds the correct solution, as well as a common wrong solution. We can now, as a teacher, construct a decision network to give feedback on student code. Essentially we construct a list of nodes, eacht of which takes five input arguments:</p>
+<ol style="list-style-type: decimal">
+<li>The check that should be performed (can be one of has_val, has_each_val, did_call, has_vec)</li>
+<li>The node where the evaluator should move to next if the condition is true (goT)</li>
+<li>The node where the evaluator should move to next if the condition is false (goT)</li>
+<li>The message to display if the condition is true (doT)</li>
+<li>The message to display if the condition is false (doF)</li>
+</ol>
+<p>Variables from the reference solution can be accessed through ref$varname.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">VeRitas</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">ref</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>a<span class="op">=</span><span class="fl">17</span>,</span>
-<span>            b<span class="op">=</span><span class="fl">21</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>start<span class="op">=</span><span class="fu"><a href="reference/node.html">node</a></span><span class="op">(</span><span class="st">"has_val(ref$a)"</span>,goT<span class="op">=</span><span class="st">"END"</span>,goF<span class="op">=</span><span class="st">"S1"</span>,doT<span class="op">=</span><span class="st">"[✓] a is found!"</span>,doF<span class="op">=</span><span class="st">"[x] a is not found"</span><span class="op">)</span>,</span>
-<span>            S1<span class="op">=</span><span class="fu"><a href="reference/node.html">node</a></span><span class="op">(</span><span class="st">"did_call('plot')"</span>,goT<span class="op">=</span><span class="st">"END"</span>,goF<span class="op">=</span><span class="st">"END"</span>,doT<span class="op">=</span><span class="st">"[?] Why plot? Please find a instead!"</span><span class="op">)</span></span>
-<span>            <span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r.igraph.org/" class="external-link">igraph</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="reference/drawNet.html">drawNet</a></span><span class="op">(</span><span class="va">net</span>,draw<span class="op">=</span><span class="st">"static"</span>,layout<span class="op">=</span><span class="va">layout_as_tree</span>,margin<span class="op">=</span><span class="fl">0.3</span>,size<span class="op">=</span><span class="fl">30</span>,vertex.shape<span class="op">=</span><span class="st">"none"</span>,vertex.label.color<span class="op">=</span><span class="st">"black"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-example-1.png" width="75%" height="75%" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cleanNet.html">cleanNet</a></span><span class="op">(</span><span class="va">net</span><span class="op">)</span></span>
-<span><span class="va">trackfuns</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/extractFuns.html">extractFuns</a></span><span class="op">(</span><span class="va">net</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="reference/runEval.html">runEval</a></span><span class="op">(</span><span class="st">"examples/01-simplest/code1.R"</span>,<span class="va">trackfuns</span>,<span class="va">ref</span>,<span class="va">net</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [x] a is not found</span></span>
+<span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>start<span class="op">=</span><span class="fu"><a href="reference/node.html">node</a></span><span class="op">(</span><span class="fu">has_val</span><span class="op">(</span><span class="va">ref</span><span class="op">$</span><span class="va">sol</span><span class="op">)</span>,</span>
+<span>                       goT<span class="op">=</span><span class="va">S2</span>,goF<span class="op">=</span><span class="va">S1</span>,</span>
+<span>                       doT<span class="op">=</span><span class="st">"[✓] Sum is found!"</span>,</span>
+<span>                       doF<span class="op">=</span><span class="st">"[x] Sum not found"</span><span class="op">)</span>,</span>
+<span>            </span>
+<span>            S1<span class="op">=</span><span class="fu"><a href="reference/node.html">node</a></span><span class="op">(</span><span class="fu">has_val</span><span class="op">(</span><span class="va">ref</span><span class="op">$</span><span class="va">wrongsol</span><span class="op">)</span>,</span>
+<span>                    goT<span class="op">=</span><span class="va">END</span>,goF<span class="op">=</span><span class="va">END</span>,</span>
+<span>                    doT<span class="op">=</span><span class="st">"[?] Did you square?"</span><span class="op">)</span>,</span>
+<span>            </span>
+<span>            S2<span class="op">=</span><span class="fu"><a href="reference/node.html">node</a></span><span class="op">(</span><span class="fu">did_call</span><span class="op">(</span><span class="st">"sum"</span>,<span class="st">"base"</span><span class="op">)</span>,</span>
+<span>                    goT<span class="op">=</span><span class="va">END</span>,goF<span class="op">=</span><span class="va">END</span>,</span>
+<span>                    doT<span class="op">=</span><span class="st">"[?] Could the sum function help?"</span><span class="op">)</span></span>
+<span>            <span class="op">)</span></span></code></pre></div>
+<p>One can visualise the graph with help of the igraph function and the drawNet function wrapper provided in VeRitas:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r.igraph.org/" class="external-link">igraph</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: package 'igraph' was built under R version 4.4.3</span></span>
+<span><span class="fu"><a href="reference/drawNet.html">drawNet</a></span><span class="op">(</span><span class="va">net</span>,draw<span class="op">=</span><span class="st">"static"</span>,layout<span class="op">=</span><span class="va">layout_as_tree</span>,margin<span class="op">=</span><span class="fl">0.3</span>,</span>
+<span>        size<span class="op">=</span><span class="fl">30</span>,vertex.shape<span class="op">=</span><span class="st">"none"</span>,vertex.label.color<span class="op">=</span><span class="st">"black"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="100%"> Use draw=“interactive” to use igraph’s interactive plotting module. Now one can turn the decision network (net) and reference implementation together into an assignment.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">MyAssignment</span> <span class="op">&lt;-</span> <span class="fu">prepareAssignment</span><span class="op">(</span><span class="va">net</span>,<span class="st">"examples/01-simplest/ref1.R"</span><span class="op">)</span></span></code></pre></div>
+<p>If one has a file code1.R in the folder examples/01/simplets, that contains the following code:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fl">1</span><span class="op">+</span><span class="fl">2</span><span class="op">+</span><span class="fl">3</span><span class="op">+</span><span class="fl">4</span><span class="op">+</span><span class="fl">5</span></span></code></pre></div>
+<p>One can check it by running:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">runSingle</span><span class="op">(</span><span class="st">"examples/01-simplest/code1.R"</span>,<span class="va">MyAssignment</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [x] Sum not found</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [?] Why plot? Please find a instead!</span></span></code></pre></div>
+<span><span class="co">#&gt; [?] Did you square?</span></span></code></pre></div>
 </div>
 </div>
   </div>
