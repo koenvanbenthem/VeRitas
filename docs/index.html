@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Give automated feedback on submitted assignments • VeRitas</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -12,71 +12,66 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
-<script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Give automated feedback on submitted assignments">
+<script src="lightswitch.js"></script><script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><script src="deps/MathJax-3.2.2/tex-chtml.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Give automated feedback on submitted assignments">
+<meta name="description" content="More about what it does (maybe more than one line) Use four spaces when indenting paragraphs within the Description.">
 <meta property="og:description" content="More about what it does (maybe more than one line) Use four spaces when indenting paragraphs within the Description.">
-<meta property="og:image" content="/logo.png">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<meta property="og:image" content="https://koenvanbenthem.github.io/VeRitas/logo.svg">
 </head>
-<body data-spy="scroll" data-target="#toc">
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
-    <div class="container template-home">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">VeRitas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
-      </span>
-    </div>
+    <nav class="navbar navbar-expand-lg fixed-top " aria-label="Site navigation"><div class="container">
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="reference/index.html">Reference</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Articles
+    <a class="navbar-brand me-2" href="index.html">VeRitas</a>
 
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="articles/batch-run.html">Batch run</a>
-    </li>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><a class="dropdown-item" href="articles/batch-run.html">Batch run</a></li>
   </ul>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
+</form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/koenvanbenthem/VeRitas/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-lightswitch" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-label="Light switch"><span class="fa fa-sun"></span></button>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-lightswitch">
+<li><button class="dropdown-item" data-bs-theme-value="light"><span class="fa fa-sun"></span> Light</button></li>
+    <li><button class="dropdown-item" data-bs-theme-value="dark"><span class="fa fa-moon"></span> Dark</button></li>
+    <li><button class="dropdown-item" data-bs-theme-value="auto"><span class="fa fa-adjust"></span> Auto</button></li>
+  </ul>
+</li>
+      </ul>
 </div>
-<!--/.nav-collapse -->
+
+
   </div>
-<!--/.container -->
+</nav><div class="container template-home">
+<div class="row">
+  <main id="main" class="col-md-9"><div class="section level1">
+<div class="page-header">
+<img src="logo.svg" class="logo" alt=""><h1 id="veritas-">VeRitas 
+<a class="anchor" aria-label="anchor" href="#veritas-"></a>
+</h1>
 </div>
-<!--/.navbar -->
-
-
-
-      </header><div class="row">
-  <div class="contents col-md-9">
-<div class="section level1">
-<div class="page-header"><h1 id="veritas-">VeRitas <img src="reference/figures/logo.png" align="right" width="120"><a class="anchor" aria-label="anchor" href="#veritas-"></a>
-</h1></div>
 <!-- badges: start -->
 <!-- badges: end -->
 <p>VeRitas allows for automated feedback on submitted code through a manually designed set of feedback rules. These rules consist of binary tests on the submitted code, based on the outcome of which feedback is shown and after which the code is sent to a next test.</p>
@@ -90,7 +85,7 @@
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
-<p>This is a basic example which shows you how to solve a common problem. Assume you have given students the assignment to add up the squares of the number 1 up to and including 5 (i.e. <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>1</mn><mn>2</mn></msup><mo>+</mo><msup><mn>2</mn><mn>2</mn></msup><mo>+</mo><msup><mn>3</mn><mn>2</mn></msup><mo>+</mo><msup><mn>4</mn><mn>2</mn></msup><mo>+</mo><msup><mn>5</mn><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">1^2+2^2+3^2+4^2+5^2</annotation></semantics></math>).</p>
+<p>This is a basic example which shows you how to solve a common problem. Assume you have given students the assignment to add up the squares of the number 1 up to and including 5 (i.e. <span class="math inline">\(1^2+2^2+3^2+4^2+5^2\)</span>).</p>
 <p>Start by defining a reference implementation in the file ref1.R, that contains:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Reference in file ref1.R</span></span>
@@ -107,48 +102,63 @@
 </ol>
 <p>Variables from the reference solution can be accessed through ref$varname.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">VeRitas</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/koenvanbenthem/VeRitas" class="external-link">VeRitas</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>start<span class="op">=</span><span class="fu"><a href="reference/node.html">node</a></span><span class="op">(</span><span class="fu">has_val</span><span class="op">(</span><span class="va">ref</span><span class="op">$</span><span class="va">sol</span><span class="op">)</span>,</span>
+<span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>start<span class="op">=</span><span class="fu"><a href="reference/node.html">node</a></span><span class="op">(</span><span class="fu"><a href="reference/has_val.html">has_val</a></span><span class="op">(</span><span class="va">ref</span><span class="op">$</span><span class="va">sol</span><span class="op">)</span>,</span>
 <span>                       goT<span class="op">=</span><span class="va">S2</span>,goF<span class="op">=</span><span class="va">S1</span>,</span>
 <span>                       doT<span class="op">=</span><span class="st">"[✓] Sum is found!"</span>,</span>
 <span>                       doF<span class="op">=</span><span class="st">"[x] Sum not found"</span><span class="op">)</span>,</span>
 <span>            </span>
-<span>            S1<span class="op">=</span><span class="fu"><a href="reference/node.html">node</a></span><span class="op">(</span><span class="fu">has_val</span><span class="op">(</span><span class="va">ref</span><span class="op">$</span><span class="va">wrongsol</span><span class="op">)</span>,</span>
+<span>            S1<span class="op">=</span><span class="fu"><a href="reference/node.html">node</a></span><span class="op">(</span><span class="fu"><a href="reference/has_val.html">has_val</a></span><span class="op">(</span><span class="va">ref</span><span class="op">$</span><span class="va">wrongsol</span><span class="op">)</span>,</span>
 <span>                    goT<span class="op">=</span><span class="va">END</span>,goF<span class="op">=</span><span class="va">END</span>,</span>
 <span>                    doT<span class="op">=</span><span class="st">"[?] Did you square?"</span><span class="op">)</span>,</span>
 <span>            </span>
-<span>            S2<span class="op">=</span><span class="fu"><a href="reference/node.html">node</a></span><span class="op">(</span><span class="fu">did_call</span><span class="op">(</span><span class="st">"sum"</span>,<span class="st">"base"</span><span class="op">)</span>,</span>
+<span>            S2<span class="op">=</span><span class="fu"><a href="reference/node.html">node</a></span><span class="op">(</span><span class="fu"><a href="reference/did_call.html">did_call</a></span><span class="op">(</span><span class="st">"sum"</span>,<span class="st">"base"</span><span class="op">)</span>,</span>
 <span>                    goT<span class="op">=</span><span class="va">END</span>,goF<span class="op">=</span><span class="va">END</span>,</span>
-<span>                    doT<span class="op">=</span><span class="st">"[?] Could the sum function help?"</span><span class="op">)</span></span>
+<span>                    doF<span class="op">=</span><span class="st">"[?] Could the sum function help?"</span><span class="op">)</span></span>
 <span>            <span class="op">)</span></span></code></pre></div>
 <p>One can visualise the graph with help of the igraph function and the drawNet function wrapper provided in VeRitas:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r.igraph.org/" class="external-link">igraph</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: package 'igraph' was built under R version 4.4.3</span></span>
 <span><span class="fu"><a href="reference/drawNet.html">drawNet</a></span><span class="op">(</span><span class="va">net</span>,draw<span class="op">=</span><span class="st">"static"</span>,layout<span class="op">=</span><span class="va">layout_as_tree</span>,margin<span class="op">=</span><span class="fl">0.3</span>,</span>
-<span>        size<span class="op">=</span><span class="fl">30</span>,vertex.shape<span class="op">=</span><span class="st">"none"</span>,vertex.label.color<span class="op">=</span><span class="st">"black"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="100%"> Use draw=“interactive” to use igraph’s interactive plotting module. Now one can turn the decision network (net) and reference implementation together into an assignment.</p>
+<span>        size<span class="op">=</span><span class="fl">30</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="75%" height="75%" style="display: block; margin: auto;"> Use draw=“interactive” to use igraph’s interactive plotting module. Now one can turn the decision network (net) and reference implementation together into an assignment.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">MyAssignment</span> <span class="op">&lt;-</span> <span class="fu">prepareAssignment</span><span class="op">(</span><span class="va">net</span>,<span class="st">"examples/01-simplest/ref1.R"</span><span class="op">)</span></span></code></pre></div>
-<p>If one has a file code1.R in the folder examples/01/simplets, that contains the following code:</p>
+<code class="sourceCode R"><span><span class="va">MyAssignment</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/prepareAssignment.html">prepareAssignment</a></span><span class="op">(</span><span class="va">net</span>,<span class="st">"examples/01-simplest/ref1.R"</span><span class="op">)</span></span></code></pre></div>
+<p>If one has a file code1.R in the folder examples/01-simplest, that contains the following code:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fl">1</span><span class="op">+</span><span class="fl">2</span><span class="op">+</span><span class="fl">3</span><span class="op">+</span><span class="fl">4</span><span class="op">+</span><span class="fl">5</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <p>One can check it by running:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">runSingle</span><span class="op">(</span><span class="st">"examples/01-simplest/code1.R"</span>,<span class="va">MyAssignment</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/runSingle.html">runSingle</a></span><span class="op">(</span><span class="st">"examples/01-simplest/code1.R"</span>,<span class="va">MyAssignment</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [x] Sum not found</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [?] Did you square?</span></span></code></pre></div>
+<p>A different file, code2.R that contains the following code:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fl">1</span><span class="op">^</span><span class="fl">2</span><span class="op">+</span><span class="fl">2</span><span class="op">^</span><span class="fl">2</span><span class="op">+</span><span class="fl">3</span><span class="op">^</span><span class="fl">2</span><span class="op">+</span><span class="fl">4</span><span class="op">^</span><span class="fl">2</span><span class="op">+</span><span class="fl">5</span><span class="op">^</span><span class="fl">2</span></span></code></pre></div>
+<p>can be checked too, and gives:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/runSingle.html">runSingle</a></span><span class="op">(</span><span class="st">"examples/01-simplest/code2.R"</span>,<span class="va">MyAssignment</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [✓] Sum is found!</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [?] Could the sum function help?</span></span></code></pre></div>
+<p>For more examples, such as how to check many student scripts at the same time, please see the articles on this website.</p>
 </div>
 </div>
-  </div>
+  </main><aside class="col-md-3"><div class="links">
+<h2 data-toc-skip>Links</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/koenvanbenthem/VeRitas/" class="external-link">Browse source code</a></li>
+</ul>
+</div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <div class="license">
+<div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li>What license is it under?</li>
+<li><a href="LICENSE.html">Full license</a></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
 
@@ -169,23 +179,20 @@
 
 
 
-  </div>
+  </aside>
 </div>
 
 
-      <footer><div class="copyright">
-  <p></p>
-<p>Developed by Koen van Benthem.</p>
+    <footer><div class="pkgdown-footer-left">
+  <p>Developed by Koen van Benthem.</p>
 </div>
 
-<div class="pkgdown">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+<div class="pkgdown-footer-right">
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
-
 
 
 

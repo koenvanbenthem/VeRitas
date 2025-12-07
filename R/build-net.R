@@ -1,5 +1,16 @@
 
-#' Create a new node in the decision network
+#' Create a node
+#'
+#' Allows the user to define a new node.
+#' @param cond A condition defined by  \link{has_vec}, \link{has_val}, \link{has_each_val} or \link{did_call}.
+#' @param goT The node to which the evaluator moves if the condition in cond is true.
+#' @param goF The node to which the evaluator moves if the condition in cond is false.
+#' @param doT The message to display if the condition in cond is true.
+#' @param doF The message to display if the condition in cond is true.
+#' @seealso \link{runSingle} for an example
+#' @examples
+#' node(did_call('plot','base'),goT=S2,goF="END",doT="message displayed if true",doF="message displayed if false")
+#'
 #' @export
 node <- function(cond,goT="END",goF="END",doT="",doF=""){
 
@@ -45,6 +56,12 @@ node <- function(cond,goT="END",goF="END",doT="",doF=""){
 
 
 #' Draw a decision network
+#'
+#' Draws a decision network for visual inspection
+#'
+#' @param net A list of nodes (see \link{node}). No node should be called END. One node should be called start (the first)
+#' @param draw Whether a static or an interactive plot (in the letter the nodes can be dragged around)
+#' @param ... Additional parameters to be passed on to the igraph plotting functions
 #' @export
 #' @import igraph
 #' @import tidyr
@@ -97,24 +114,20 @@ drawNet <- function(net,draw=c('none','interactive','static'),...){
 
 }
 
-#' Function necessary for preparing the net for usage
-#' @export
 cleanNet <- function(net){
   net <- do.call(rbind,net)
   net$condition <- gsub(")$",",obj=obj)",net$condition)
   net
 }
 
-#' Extract the functions that should be tracked
-#' @export
+
 extractFuns <- function(net){
   trackenv <- makeTrackEnv()
   totrack <- lapply(net$condition, FUN = function(x) eval(parse(text=x),envir=trackenv))
   totrack <- totrack[!unlist(lapply(totrack,is.null))]
 }
 
-#' function for making an environment that redefines all test functions,
-#' so did_call can be evaluated
+
 makeTrackEnv <- function(){
   trackenv <- new.env()
   eval(parse(text="has_val <- function(...){}"),envir=trackenv)

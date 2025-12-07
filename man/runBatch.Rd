@@ -5,19 +5,33 @@
 \title{Function for running a set of scripts
 Use with caution!
 If you run this script, all submitted R scripts will be executed automatically.
-Be sure that you trust these scripts - they could severly harm your computer.}
+Be sure that you trust these scripts - they could severely harm your computer.}
 \usage{
 runBatch(
   dirname,
   assignment,
   pattern = ".*\\\\.R$",
   rec = FALSE,
-  showfiles = TRUE
+  overridewarning = FALSE
 )
+}
+\arguments{
+\item{dirname}{Character, the directory that contains the scripts for analysing.}
+
+\item{assignment}{An assignment, prepared with \link{prepareAssignment}.}
+
+\item{pattern}{The pattern that the R scripts adhere to. By default all files ending in .R are found.}
+
+\item{rec}{Whether or not to find files recursively, i.e. in subdirectories too.}
+
+\item{overridewarnings}{Whether or not to show a warning before running the function.}
+}
+\value{
+A list containing detailed output on each of the R scripts in the submitted directory. The output can be passed to \link{analyseBatch}, \link{extractScripts} or \link{extractFeedback} for further processing.
 }
 \description{
 Function for running a set of scripts
 Use with caution!
 If you run this script, all submitted R scripts will be executed automatically.
-Be sure that you trust these scripts - they could severly harm your computer.
+Be sure that you trust these scripts - they could severely harm your computer.
 }

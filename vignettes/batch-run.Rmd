@@ -14,7 +14,11 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+## Analysing multiple scripts at once
+**important note** _evaluating submitted scripts requires their evaluation. I.e. the code will be run on the machine where the batch run is initiated. We encourage you to only run this code within a docker container or virtual machine. R code can be written that overwrites or deletes all your existing files or download malicious files from the web. Be extremely careful when running this code on your own machine. We take no responsibility for any damage to your machine._
+
+As with the single run, we first define a net. We work with the same assignment as on the main page (write code that sums the squares of the number 1 up to 5).
+```{r setup, warning=FALSE}
 library(VeRitas)
 net <- list(start=node(has_val(ref$sol),
                        goT=S2,goF=S1,
@@ -29,7 +33,44 @@ net <- list(start=node(has_val(ref$sol),
                     goT=END,goF=END,
                     doF="[?] Could the sum function help?")
             )
-MyAssignment <- prepareAssignment(net,"examples/01-simplest/ref1.R")
-myout <- runBatch("C:/Documents and Settings/Koen/Downloads/Assignment exercise Lecture 6 Download 04 December 2025 447 PM",assignment=MyAssignment,rec=TRUE)
+MyAssignment <- prepareAssignment(net,"../examples/01-simplest/ref1.R")
+```
+Now, with the prepared assignment, we can do a batch run. This finds all .R files in the supplied directory and then runs them through VeRitas.
+```{r,eval=FALSE}
+batchout <- runBatch(dirname =  "../examples/01-simplest/batch-run",
+                     assignment = MyAssignment)
 
 ```
+```{r,eval=TRUE,echo=FALSE}
+batchout <- runBatch(dirname =  "../examples/01-simplest/batch-run",
+                     assignment = MyAssignment,overridewarning=TRUE)
+
+```
+
+We can now use extractFeedback to extract the feedback for each submission into a data frame:
+```{r}
+allfeedback <- extractFeedback(batchout)
+allfeedback
+```
+We can also print specific feedback with the cat function:
+```{r}
+cat(allfeedback$feedback[1])
+``` 
+Furthermore it is possible to draw an overview of how the scripts were run through the evaluation net using the analyseBatch function:
+```{r message=FALSE, warnings=FALSE,fig.width=9,fig.height=9,out.width='75%',out.height='75%',fig.align='center'}
+library(igraph)
+analyseBatch(batchout,draw="static",layout=layout_as_tree,margin=0.3,
+        size=30)
+```
+Note that in this graph terminal nodes (end nodes) contain the number of scripts that they contain, while the thickness of the edges corresponds to the number of scripts that have flowed through that edge. To obtain the scripts that were at any specific terminal node, use extractScripts:
+```{r}
+extractScripts(batchout, "S1")
+```
+Unfortunately it is currently not possible to extract scripts from end nodes. We are working on this functionality. For now, a workaround would be to simply add an additional dummy node before the end, which one can track.
+
+In Rstudio, it is then possible to load such a script using rstudios api directly. For example to load the first script that is obtained with the code on line 67, use:
+```{r eval=FALSE}
+script <- extractScripts(batchout,"S1")
+rstudioapi::documentOpen(script[1])
+```
+This allows for efficient checking of code, and as a teacher one can, this way relatively easily design new feedback rules.

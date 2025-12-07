@@ -2,10 +2,28 @@
 % Please edit documentation in R/build-net.R
 \name{node}
 \alias{node}
-\title{Create a new node in the decision network}
+\title{Create a node}
 \usage{
 node(cond, goT = "END", goF = "END", doT = "", doF = "")
 }
+\arguments{
+\item{cond}{A condition defined by  \link{has_vec}, \link{has_val}, \link{has_each_val} or \link{did_call}.}
+
+\item{goT}{The node to which the evaluator moves if the condition in cond is true.}
+
+\item{goF}{The node to which the evaluator moves if the condition in cond is false.}
+
+\item{doT}{The message to display if the condition in cond is true.}
+
+\item{doF}{The message to display if the condition in cond is true.}
+}
 \description{
-Create a new node in the decision network
+Allows the user to define a new node.
+}
+\examples{
+node(did_call('plot','base'),goT=S2,goF="END",doT="message displayed if true",doF="message displayed if false")
+
+}
+\seealso{
+\link{runSingle} for an example
 }

@@ -11,7 +11,7 @@
 #   Test Package:              'Ctrl + Shift + T'
 #
 # Run roxygen through roxygen2::roxygenise()
-# Build website through pkgdown::build_site_github_pages()
+# Build website through pkgdown::build_site()
 
 
 # boe <- function(am,b,d=3,...){
@@ -37,7 +37,7 @@ checkRstart <- function(filename,funList=NULL,csv,killFuns){
   obj
 }
 
-#' Function for running the code
+
 #' @import evaluate
 codeRunner <- function(obj,varsAsList=TRUE,funList=NULL,csv,killFuns){
   vars <- new.env()
@@ -137,9 +137,7 @@ cleanCode <- function(code){
 
 ### END local checkR
 
-######### Run student evalation
-#' Main function for running a single R script
-#' @export
+
 runEval <- function(Rfile,totrack,ref,net,csv='',killFuns=c("`?`","setwd","system","file.choose","install.packages","View"),verbose=FALSE,netcount=FALSE){
   # Run code
   ref <- as.list(ref)
@@ -189,8 +187,14 @@ runEval <- function(Rfile,totrack,ref,net,csv='',killFuns=c("`?`","setwd","syste
   }
 }
 
-#' @export
+#' Assignment setup
 #'
+#' Uses an assessment net (a named list of nodes) and a reference file to prepare an assignment.
+#' @param net A named list of nodes (see \link{node}) that describes what checks should be performed and what feedback they yield. The first node should be named start, and any final nodes should be named END. No other nodes should start with these words in their name.
+#' @param referencefile An R script that contains a reference solution. The checks in the nodes use values from the reference solution.
+#' @return Returns an initialized assignment, which is in essence a list that contains the net, the functions that should be tracked, and the output of the reference file.
+#' @seealso \link{runSingle} for a simple example.
+#' @export
 prepareAssignment <- function(net,referencefile){
   ref <- new.env()
   source(referencefile,local=ref)
@@ -202,6 +206,30 @@ prepareAssignment <- function(net,referencefile){
   list(net=net,trackfuns=trackfuns,ref=ref)
 }
 
+#' Evaluate a single script.
+#'
+#' This function evaluates a single .R file based on a prepared assignment.
+#' @param studentfile The name (and location) of the file that is to be evaluated.
+#' @param prepared A prepared assignment using \link{prepareAssignment}
+#' @returns The feedback is shown on the screen.
+#' @examples
+#' # example code
+#' library(VeRitas)
+#' net <- list(start=node(has_val(ref$sol),
+#'                        goT=S2,goF=S1,
+#'                        doT="[✓] Sum is found!",
+#'                        doF="[x] Sum not found"),
+#'
+#'             S1=node(has_val(ref$wrongsol),
+#'                     goT=END,goF=END,
+#'                     doT="[?] Did you square?"),
+#'
+#'              S2=node(did_call("sum","base"),
+#'                     goT=END,goF=END,
+#'                     doF="[?] Could the sum function help?")
+#' )
+#' MyAssignment <- prepareAssignment(net,"../../examples/01-simplest/ref1.R")
+#' runSingle("../../examples/01-simplest/code2.R",MyAssignment)
 #' @export
 runSingle <- function(studentfile,prepared){
   runEval(studentfile,prepared$trackfuns,prepared$ref,prepared$net)

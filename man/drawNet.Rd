@@ -6,6 +6,13 @@
 \usage{
 drawNet(net, draw = c("none", "interactive", "static"), ...)
 }
+\arguments{
+\item{net}{A list of nodes (see \link{node}). No node should be called END. One node should be called start (the first)}
+
+\item{draw}{Whether a static or an interactive plot (in the letter the nodes can be dragged around)}
+
+\item{...}{Additional parameters to be passed on to the igraph plotting functions}
+}
 \description{
-Draw a decision network
+Draws a decision network for visual inspection
 }
